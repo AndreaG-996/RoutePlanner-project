@@ -21,13 +21,21 @@ CORS(WRApp)
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-# Check if API_KEY successfully loaded
+# Check if API_KEY and SECRET_KEY successfully loaded
 if API_KEY:
     print(f"API Key successfully loaded: {API_KEY}")
 else:
     print("API Key not found，please check .env file.")
+if SECRET_KEY:
+    print("SECRET_KEY successfully loaded.")
+else:
+    print("SECRET_KEY not found, please check .env file.")
 
+# Assign the SECRET_KEY to Flask
+WRApp.secret_key = SECRET_KEY
+# Initialise Google Maps API
 gmaps = googlemaps.Client(key=API_KEY)
 
 # Define solve_tsp function to calculate the optimised route (!!! Can use different AI methods to improve)
