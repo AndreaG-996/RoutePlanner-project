@@ -12,11 +12,22 @@ from flask_cors import CORS
 import googlemaps
 import numpy as np
 from ortools.constraint_solver import pywrapcp, routing_enums_pb2
+from dotenv import load_dotenv
+import os
 
 # Initialise the Flask and Googlemaps API
 WRApp = Flask(__name__)
 CORS(WRApp)
-API_KEY = "AIzaSyCqoW-Ycm_lNsnuG5bjLaBcKWCbyxIacYw"
+
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
+
+# Check if API_KEY successfully loaded
+if API_KEY:
+    print(f"API Key successfully loaded: {API_KEY}")
+else:
+    print("API Key not found，please check .env file.")
+
 gmaps = googlemaps.Client(key=API_KEY)
 
 # Define solve_tsp function to calculate the optimised route (!!! Can use different AI methods to improve)
@@ -136,40 +147,3 @@ def optimise_route():
 if __name__ == '__main__':
     # Initiate under local developing mode
     WRApp.run(debug=True)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
